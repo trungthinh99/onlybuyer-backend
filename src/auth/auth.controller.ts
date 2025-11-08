@@ -1,6 +1,6 @@
-import { Controller, Post, Body } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthService } from './auth.service';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -10,7 +10,7 @@ export class AuthController {
   @ApiBody({
     schema: { example: { email: 'test@gmail.com', password: '123456' } },
   })
-  @ApiResponse({ status: 200, description: 'Return boolean' })
+  @ApiResponse({ status: 201, description: 'Return boolean' })
   @Post('register')
   @Post('register')
   register(@Body() body: { email: string; password: string }) {
@@ -21,7 +21,7 @@ export class AuthController {
   @ApiBody({
     schema: { example: { email: 'test@gmail.com', password: '123456' } },
   })
-  @ApiResponse({ status: 200, description: 'Return JWT token' })
+  @ApiResponse({ status: 200, description: 'Return access token and user id' })
   login(@Body() body: { email: string; password: string }) {
     return this.authService.login(body.email, body.password);
   }

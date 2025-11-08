@@ -11,12 +11,12 @@ export class CartController {
 
   @Post('add')
   @ApiBody({
-    schema: { example: { userId: 1, productId: 1, quantity: 10 } },
+    schema: { example: { productId: 1, quantity: 10 } },
   })
   @ApiResponse({ status: 201, description: 'Add product to cart' })
   addToCart(
     @Req() req: any,
-    @Body() body: { userId: number; productId: number; quantity: number },
+    @Body() body: { productId: number; quantity: number },
   ) {
     const { productId, quantity } = body;
     const userId = req.user.userId;
